@@ -1,0 +1,121 @@
+<eww>
+    <definitions>
+        <def name="bar">
+            <box orientation="h">
+                <box orientation="h" halign="start">
+                    <workspaces/>
+                </box>
+                <box orientation="h" halign="end" spacing="40" space-evenly="false">
+                    <play-pause/>
+                    <slider-vol/>
+                    <time/>
+                </box>
+            </box>
+        </def>
+
+        <def name="media">
+            <box orientation="v">
+                <image path="{{media-url}}" width="40" height="40"></image>
+                <box>
+                    <box class="media-dropdown-icon">
+                        
+                    </box>
+                    <box class="media-dropdown-icon">
+                        
+                    </box>
+                    <box class="media-dropdown-icon">
+                        
+                    </box>
+                </box>
+            </box>
+        </def>
+
+        <def name="workspaces">
+            <box orientation="h" class="workspaces" space-evenly="false" halign="start">
+                <button class="{{s-ws1}} workspace" onclick="i3-msg 'workspace 1'">term</button>
+                <button class="{{s-ws2}} workspace" onclick="i3-msg 'workspace 2'">spot</button>
+                <button class="{{s-ws3}} workspace" onclick="i3-msg 'workspace 3'">fire</button>
+                <button class="{{s-ws4}} workspace" onclick="i3-msg 'workspace 4'">fire</button>
+                <button class="{{s-ws5}} workspace" onclick="i3-msg 'workspace 5'">code</button>
+                <button class="{{s-ws6}} workspace" onclick="i3-msg 'workspace 6'">o</button>
+                <button class="{{s-ws7}} workspace" onclick="i3-msg 'workspace 7'">o</button>
+                <button class="{{s-ws8}} workspace" onclick="i3-msg 'workspace 8'">o</button>
+                <button class="{{s-ws9}} workspace" onclick="i3-msg 'workspace 9'">o</button>
+            </box>
+        </def>
+
+        <!-- Volume Slider-->
+        <def name="slider-vol">
+             <box class="slider-vol" space-evenly="false">
+                <scale min="0" max="101" value="{{volume}}" onchange="amixer -D pulse sset Master {}%"/>
+            </box>   
+        </def>
+
+        <!--Media-->
+        <def name="play-pause">
+            <box>
+                <button
+                    onclick="playerctl play-pause -p spotify,firefox"
+                    onrightclick="~/.config/eww/scripts/media-window"
+                    >{{if media-status == "Playing" then media-label else ''}}
+                </button>
+            </box>
+        </def>
+
+        <!--Time-->
+        <def name="time">
+            <box class="time">{{hour}}:{{min}} {{month}} {{number_day}}</box>
+        </def>
+    </definitions>
+
+    <variables>
+        <!--Profile Name-->
+        <script-var name="profile_name">echo $USER</script-var>
+
+        <script-var name="media-status" interval="10ms">bash -c 'playerctl status -p spotify,firefox'</script-var>
+        <script-var name="media-label" interval="10ms">bash -c '~/.config/eww/scripts/media'</script-var>
+        <script-var name="media-url">bash -c 'playerctl metadata mpris:artUrl'</script-var>
+        <var name="show-media" interval="10ms">true</var>
+
+        <!--Workspace Style Vars-->
+        <script-var name="s-ws1" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 1'</script-var>
+        <script-var name="s-ws2" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 2'</script-var>
+        <script-var name="s-ws3" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 3'</script-var>
+        <script-var name="s-ws4" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 4'</script-var>
+        <script-var name="s-ws5" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 5'</script-var>
+        <script-var name="s-ws6" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 6'</script-var>
+        <script-var name="s-ws7" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 7'</script-var>
+        <script-var name="s-ws8" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 8'</script-var>
+        <script-var name="s-ws9" interval="10ms">bash -c '~/.config/eww/scripts/workspace-style 9'</script-var>
+		
+        <!--date vars-->
+        <script-var name="day" interval="1h">date "+%a"</script-var>
+		<script-var name="number_day" interval="5h">date "+%d"</script-var>
+        <script-var name="month" interval="10h">date "+%b"</script-var>
+        <script-var name="min" interval="10s">date "+%M"</script-var>
+        <script-var name="hour" interval="1m">date "+%H"</script-var>
+        <script-var name="year_full" interval="15h">date "+%Y"</script-var>
+
+		<!--volume-->
+        <script-var name="volume_stat" interval="10ms">bash -c 'scripts/volume icon'</script-var>
+        <script-var name="volume_control">bash -c 'scripts/volume mute'</script-var>
+        <script-var name="volume" interval="16ms">bash -c 'scripts/getvol'</script-var>
+
+	</variables>
+    
+    <windows>
+        <!-- Put your window blocks here -->
+        <window name="bar" stacking="bg">
+            <geometry width="100%" height="30px"/>
+            <widget>
+                <bar/>
+            </widget>
+        </window>
+        <window name="media">
+            <geometry width="350px" height="300px" x="1950px" y="30px"/>
+            <widget>
+                <media/>
+            </widget>
+        </window>
+    </windows>
+</eww>

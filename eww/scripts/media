@@ -1,0 +1,5 @@
+#!/bin/sh
+TITLE=$(playerctl metadata -p spotify,firefox title)
+ARTIST=$(playerctl metadata -p spotify,firefox artist)
+
+echo $TITLE - $ARTIST

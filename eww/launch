@@ -1,0 +1,15 @@
+#!/bin/sh
+BASE_FILE="/home/greg/.config/eww/eww-style.scss"
+STYLE_FILE="/home/greg/.config/eww/eww.scss"
+
+. "/home/greg/.cache/wal/colors.sh"
+
+rm "$STYLE_FILE"
+cp "$BASE_FILE" "$STYLE_FILE"
+sed -i "s/bg/$color0/" "$STYLE_FILE"
+sed -i "s/open-workspace/$color1/" "$STYLE_FILE"
+sed -i "s/visible-workspace/$color2/" "$STYLE_FILE"
+sed -i "s/active-workspace/$color3/" "$STYLE_FILE"
+sed -i "s/awb/$color3/" "$STYLE_FILE"
+sed -i "s/vwb/$color3/" "$STYLE_FILE"
+sed -i "s/wh/$color1/" "$STYLE_FILE"

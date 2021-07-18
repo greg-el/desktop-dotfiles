@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Active workspace
+if [[ $(i3-msg -t get_workspaces | jq --arg WORKSPACE "$1" '.[] | select(.name==$WORKSPACE) .focused') == 'true' ]]; then
+    ACTIVE='active'
+fi
+
+# If visible
+if [[ $(i3-msg -t get_workspaces | jq --arg WORKSPACE "$1" '.[] | select(.name==$WORKSPACE) .visible') == 'true' ]]; then
+    VISIBLE='visible'
+fi
+
+# Other open workspaces
+if [[ $(i3-msg -t get_workspaces | jq --arg WORKSPACE "$1" '.[] | select(.name==$WORKSPACE)') != '' ]]; then
+    OPEN='open'
+fi
+
+echo $ACTIVE $VISIBLE $OPEN

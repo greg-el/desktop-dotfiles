@@ -1,0 +1,73 @@
+* {
+    all: unset; //Unsets everything so you can style everything from scratch
+}
+
+window {
+    background-color: bg;
+    font-family: "Noto Sans Mono";
+    font-weight: normal;
+    font-size: 16px;
+    color: rgb(224, 224, 224);
+}
+
+button {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.slider-vol scale trough highlight {
+    all: unset;
+    background-color: #6f8798;
+    color: #000000;
+    border-radius: 10px;
+}
+
+.slider-vol scale trough {
+    all: unset;
+    background-color: #4e4e4e;
+    border-radius: 2px;
+    min-height: 15px;
+    min-width: 100px;
+    margin-left: 10px;
+}
+
+.time {
+    padding-right: 20px;
+}
+
+.icon {
+    font-size: 22px;
+}
+
+.workspaces {
+    padding-left: 10px;
+}
+
+.workspace {
+    color: rgb(66, 66, 66);
+}
+
+.workspace:hover {
+    background-color: wh;
+}
+
+.open {
+    color: open-workspace;
+}
+
+.visible {
+    border-bottom: 1px solid vwb;
+    color: visible-workspace;
+}
+
+.active {
+    color: active-workspace;
+    background-color: darken(active-workspace, 10%);
+    border-bottom: 1px solid awb;
+}
+
+.media-dropdown-icon {
+    color: rgb(56, 56, 56);
+    font-size: 40px;
+}
+
