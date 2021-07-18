@@ -1,0 +1,17 @@
+font:
+  normal:
+    family: Noto Sans Mono
+    style: Regular
+
+  size: 10
+
+
+shell:
+  program: /bin/zsh
+  
+window:
+  padding:
+    x: 10
+    y: 10
+  dynamic_padding: true
+
